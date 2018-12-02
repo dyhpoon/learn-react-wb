@@ -4,8 +4,12 @@ import Page from '../components/Page';
 import withData from "../lib/withData";
 
 class MyApp extends App {
-  static async getInitialProps({ query }) {
-    const pageProps = { query }
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {}
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+    pageProps.query = ctx.query
     return { pageProps }
   }
 
