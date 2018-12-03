@@ -2,9 +2,9 @@ import gql from 'graphql-tag';
 import React, { Component } from 'react';
 import { Query } from "react-apollo";
 import styled from "styled-components";
-import Item from './Item';
-import Pagination from './Pagination'
 import { perPage } from '../config';
+import Item from './Item';
+import Pagination from './Pagination';
 
 const ALL_ITEMS_QUERY = gql`
     query ALL_ITEMS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
@@ -40,7 +40,6 @@ export default class Items extends Component {
             query={ALL_ITEMS_QUERY}
             variables={{
                 skip: (this.props.page - 1) * perPage,
-                first: perPage,
             }}
             fetchPolicy="network-only"
             >
@@ -62,4 +61,4 @@ export default class Items extends Component {
   }
 }
 
-export { ALL_ITEMS_QUERY }
+export { ALL_ITEMS_QUERY };

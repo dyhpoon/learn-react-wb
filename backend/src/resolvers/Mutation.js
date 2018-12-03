@@ -41,6 +41,9 @@ const Mutations = {
     // delete it
     return ctx.db.mutation.deleteItem({ where }, info)
   },
+  async signup(parent, args, ctx, info) {
+    
+  },
 };
 
 module.exports = Mutations;
