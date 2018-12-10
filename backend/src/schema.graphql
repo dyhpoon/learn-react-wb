@@ -26,5 +26,5 @@ type User {
   id: ID!
   name: String!
   email: String!
-  permission: [Permission!]!
+  permissions: [Permission!]!
 }
