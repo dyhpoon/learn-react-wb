@@ -12,7 +12,6 @@ const RESET_MUTATION = gql`
       id
       name
       email
-      permissions
     }
   }
 `
