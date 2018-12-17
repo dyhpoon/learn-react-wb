@@ -36,7 +36,7 @@ class User extends Component {
           return (
             <td>
               <label htmlFor={`${user.id}-perission-${permission}`}>
-                <input type="checkbox"></input>
+                <input id={`${user.id}-perission-${permission}`} type="checkbox"></input>
               </label>
             </td>
           )
