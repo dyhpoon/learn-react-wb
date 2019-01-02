@@ -1,9 +1,12 @@
-import gql from 'graphql-tag';
-import React, { Component } from 'react';
-import { Mutation } from 'react-apollo';
-import StripeCheckout from 'react-stripe-checkout';
+import React, { Component } from 'react'
+import StripeCheckout from 'react-stripe-checkout'
+import { Mutation } from 'react-apollo'
+import Router from 'next/router'
+import NProgress from 'nprogress'
+import gql from 'graphql-tag'
+import Error from './ErrorMessage'
+import User, { CURRENT_USER_QUERY } from './User'
 import calcTotalPrice from '../lib/calcTotalPrice';
-import User, { CURRENT_USER_QUERY } from './User';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {
