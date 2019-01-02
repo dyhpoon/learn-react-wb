@@ -25,6 +25,14 @@ export default class CartItem extends Component {
 
   render() {
     const { cartItem } = this.props
+    if (!cartItem) {
+      return (
+        <CartItemStyles>
+          <p>This Item has been removed</p>
+          <RemoveFromCart id={cartItem.id} />
+        </CartItemStyles>
+      )
+    }
     return (
       <CartItemStyles>
         <img width="100" src={cartItem.item.image} alt={cartItem.item.title} />
