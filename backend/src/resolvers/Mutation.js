@@ -247,6 +247,44 @@ const Mutations = {
       where: { id: args.id },
     }, info)
   },
+  async createOrder(parents, args, ctx, info) {
+    // make sure sign in
+    const { userId } = ctx.request
+    if (!userId) {
+      throw new Error('You need to login first')
+    }
+    const user = await ctx.db.query.user({ where: { id: userId } },
+      `{
+        id
+        name
+        email
+        cart {
+          id
+          quantity
+          item {
+            id
+            title
+            price
+            description
+            image
+          }
+        }}`)
+
+    // recalculate the total for the price
+    const amount = user.cart.reduce((accum, cartItem) => {
+      return accum + cartItem.item.price * cartItem.quantity
+    }, 0)
+
+    // create the stripe charge
+
+    // convert cartItems to OrderItems
+
+    // create order
+
+    // cleanup user's cart
+
+    // return order
+  },
 };
 
 module.exports = Mutations;

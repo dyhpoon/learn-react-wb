@@ -9,6 +9,7 @@ import CartStyles from './styles/CartStyles';
 import CloseButton from './styles/CloseButton';
 import SickButton from './styles/SickButton';
 import Supreme from './styles/Supreme';
+import TakeMyMoney from './TakeMyMoney';
 import User from './User';
 
 const LOCAL_STATE_QUERY = gql`
@@ -54,7 +55,9 @@ class Cart extends Component {
 
               <footer>
                 <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-                <SickButton>Checkout</SickButton>
+                <TakeMyMoney>
+                  <SickButton>Checkout</SickButton>
+                </TakeMyMoney>
               </footer>
               </CartStyles>
           )
