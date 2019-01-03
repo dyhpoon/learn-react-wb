@@ -29,15 +29,19 @@ function totalItems(cart) {
 }
 
 export default class TakeMyMoney extends Component {
-  onToken = (res, createOrder) => {
-    createOrder({
+  onToken = async (res, createOrder) => {
+    NProgress.start()
+    const order = await createOrder({
       variables: {
         token: res.id
       }
     })
-    .then(console.log)
     .catch(err => {
       alert(err.message)
+    })
+    Router.push({
+      pathname: '/order',
+      query: { id: order.data.createOrder.id },
     })
   }
 
@@ -53,7 +57,7 @@ export default class TakeMyMoney extends Component {
                     amount={calcTotalPrice(me.cart)}
                     name="Sick Fits"
                     description={`Order of ${totalItems(me.cart)}`}
-                    image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
+                    image={me.cart.length > 0 && me.cart[0].item && me.cart[0].item.image}
                     stripeKey="pk_test_3pMZ9pvUAFffxPbNs0h3madq"
                     currency="USD"
                     email={me.email}
