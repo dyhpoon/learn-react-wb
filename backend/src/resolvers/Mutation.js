@@ -4,7 +4,7 @@ const { randomBytes } = require('crypto')
 const { promisify } = require('util')
 const { transport, makeANiceEmail } = require('../mail')
 const { hasPermission } = require('../utils')
-const stripe = require('stripe')
+const stripe = require('../stripe')
 
 const Mutations = {
   async createItem(parent, args, ctx, info) {
@@ -268,6 +268,7 @@ const Mutations = {
             price
             description
             image
+            largeImage
           }
         }}`)
 
@@ -284,12 +285,34 @@ const Mutations = {
     })
 
     // convert cartItems to OrderItems
+    const orderItems = user.cart.map(cartItem => {
+      const orderItem = {
+        ...cartItem.item,
+        quantity: cartItem.quantity,
+        user: { connect: { id: userId } },
+      }
+      delete orderItem.id
+      return orderItem
+    })
 
     // create order
+    const order = await ctx.db.mutation.createOrder({
+      data: {
+        total: charge.amount,
+        charge: charge.id,
+        items: { create: orderItems },  // prisma will create orderItems and link them all in one go
+        user: { connect: { id: userId } },
+      },
+    })
 
     // cleanup user's cart
+    const cartItemIds = user.cart.map(cartItem => cartItem.id)
+    await ctx.db.mutation.deleteManyCartItems({
+      where: { id_in: cartItemIds },
+    })
 
     // return order
+    return order
   },
 };
 

@@ -34,7 +34,9 @@ export default class TakeMyMoney extends Component {
       variables: {
         token: res.id
       }
-    }).catch(err => {
+    })
+    .then(console.log)
+    .catch(err => {
       alert(err.message)
     })
   }
@@ -51,7 +53,7 @@ export default class TakeMyMoney extends Component {
                     amount={calcTotalPrice(me.cart)}
                     name="Sick Fits"
                     description={`Order of ${totalItems(me.cart)}`}
-                    image={me.cart[0].item && me.cart[0].item.image}
+                    image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
                     stripeKey="pk_test_3pMZ9pvUAFffxPbNs0h3madq"
                     currency="USD"
                     email={me.email}
