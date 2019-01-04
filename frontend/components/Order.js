@@ -43,7 +43,7 @@ export default class Order extends Component {
          if (loading) return <p>Loading...</p>
          const order = data.order
          return (
-          <OrderStyles>
+          <OrderStyles data-test="order">
             {/* <head>
               <title>Sick Fits - Order {order.id}</title>
             </head> */}
@@ -91,3 +91,5 @@ export default class Order extends Component {
     )
   }
 }
+
+export { SINGLE_ORDER_QUERY }
