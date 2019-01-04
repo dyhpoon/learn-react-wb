@@ -25,10 +25,10 @@ export default class Signin extends Component {
 
   render() {
     return (
-      <Mutation mutation={REQUEST_RESET_MUTATION} variables={this.state} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+      <Mutation mutation={REQUEST_RESET_MUTATION} variables={this.state}>
         {(reset, { error, loading, called }) => {
           return (
-            <Form disabled={loading} aria-busy={loading} method="post" onSubmit={async e => {
+            <Form data-test="form" disabled={loading} aria-busy={loading} method="post" onSubmit={async e => {
               e.preventDefault()
               await reset()
               this.setState({ email: "" })
@@ -50,3 +50,5 @@ export default class Signin extends Component {
     )
   }
 }
+
+export { REQUEST_RESET_MUTATION }
