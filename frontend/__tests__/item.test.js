@@ -1,5 +1,6 @@
 import ItemComponent from '../components/Item';
 import { shallow } from 'enzyme'
+import toJSON from 'enzyme-to-json'
 
 const fakeItem = {
   id: 'abc123',
@@ -24,5 +25,10 @@ describe('<Item/>', () => {
     const buttonList = wrapper.find('.buttonList');
     expect(buttonList.children()).toHaveLength(3)
     expect(buttonList.find('Link').exists()).toBeTruthy()
+  })
+
+  it('snapshot', () => {
+    const wrapper = shallow(<ItemComponent item={fakeItem} />)
+    expect(toJSON(wrapper)).toMatchSnapshot()
   })
 })
