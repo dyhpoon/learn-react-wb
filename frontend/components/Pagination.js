@@ -28,7 +28,7 @@ class Pagination extends Component {
           const page = this.props.page
 
           return (
-            <PaginationStyles>
+            <PaginationStyles data-test="pagination">
               <Head>
                 <title>Sick Fits | Page {page} pf {pages}</title>
               </Head>
@@ -38,13 +38,13 @@ class Pagination extends Component {
               }}>
                 <a className="prev" aria-disabled={page <= 1}>Prev</a>
               </Link>
-              <p>Page {page} of {pages}!</p>
+              <p>Page {page} of <span className="totalPages">{pages}</span>!</p>
               <p>{count} items total</p>
               <Link prefetch href={{
                 pathname: 'items',
                 query: { page: page + 1 },
               }}>
-                <a className="prev" aria-disabled={page >= pages}>Next</a>
+                <a className="next" aria-disabled={page >= pages}>Next</a>
               </Link>
             </PaginationStyles>
           )
@@ -55,3 +55,4 @@ class Pagination extends Component {
 }
 
 export default Pagination;
+export { PAGINATION_QUERY }
