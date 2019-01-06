@@ -11,6 +11,7 @@ function createClient({ headers }) {
         fetchOptions: {
           credentials: 'include',
         },
+        headers,
       });
     },
     clientState: {
