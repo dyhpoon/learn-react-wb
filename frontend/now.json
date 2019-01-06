@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "public": true,
+  "public": false,
   "builds": [
     { "src": "package.json", "use": "@now/next" }
   ],
