@@ -21,7 +21,7 @@ class Pagination extends Component {
     return (
       <Query query={PAGINATION_QUERY}>
         {({data, loading, error}) => {
-          if (loading) return <p>Loading...</p>
+          if (loading) return null
           if (error) return <Error error={error} />
 
           const count = data.itemsConnection.aggregate.count
