@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "public": true,
+  "builds": [
+    { "src": "src/index.js", "use": "@now/node-server" }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "/src/index.js" }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "FRONTEND_URL": "@sf-frontend-url",
+    "PRISMA_ENDPOINT": "@sf-prisma-endpoint",
+    "PRISMA_SECRET": "@sf-prisma-secret",
+    "APP_SECRET": "@sf-app-secret",
+    "STRIPE_SECRET": "@sf-stripe-secret",
+    "MAIL_HOST": "@sf-mail-host",
+    "MAIL_PORT": "@sf-mail-port",
+    "MAIL_USER": "@sf-mail-user",
+    "MAIL_PASS": "@sf-mail-pass"
+  }
+}
